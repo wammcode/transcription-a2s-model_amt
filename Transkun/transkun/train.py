@@ -356,6 +356,13 @@ def train(workerId, nWorker, filename, runSeed, args):
 
 if __name__ == '__main__':
 
+    # Generic data/ + TXT-partition interface. Keep the legacy MAESTRO CLI
+    # available for its original serialized annotation format.
+    if any(argument == '--datasetRoot' or argument.startswith('--datasetRoot=') for argument in sys.argv[1:]):
+        from .trainAMT import main
+        main()
+        sys.exit(0)
+
 
     parser = argparse.ArgumentParser("Perform Training")
     parser.add_argument('saved_filename')

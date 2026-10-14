@@ -45,11 +45,13 @@ setuptools.setup(
             'transkun = transkun.transcribe:main',
             'transkunEval = transkun.computeMetrics:main',
             'transkunA2S = transkun.transcribeA2S:main',
-            'transkunTrainA2S = transkun.trainA2S:main'
+            'transkunTrainA2S = transkun.trainA2S:main',
+            'transkunTrainAMT = transkun.trainAMT:main'
         ]
     },
     install_requires=requirements,
     extras_require={"a2s": ["music21>=9,<11", "soundfile>=0.12"],
+                    "amt": ["soundfile>=0.12"],
                     "test": ["pytest>=7"]},
 
 )

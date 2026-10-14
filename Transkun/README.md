@@ -1,5 +1,37 @@
 # Piano Transcription with Neural Semi-CRF
 
+## Entrenamiento AMT con datasets en data/
+
+El modelo AMT original se puede entrenar con pares audio/MIDI en archivos
+`train.txt`, `val.txt` y `test.txt`, sin convertirlos a metadatos MAESTRO.
+Consulta [Transkun_AMT_TRAINING.md](Transkun_AMT_TRAINING.md) para comandos,
+checkpoints, logs, reanudación y la medición realizada en la RTX 4050 de 6 GB.
+Para trasladar el entrenamiento a otro servidor, seguir
+[Transkun_AMT_SERVER.md](Transkun_AMT_SERVER.md), que incluye instalación,
+copia del dataset y ejecución desde cero en segundo plano hasta completar
+el plan de entrenamiento.
+
+```bash
+python -m transkun.trainAMT \
+  --datasetRoot ../data/data_saxophone/real_a2s_sax_dataset \
+  --partitionDir amt_partitions/saxophone_amt \
+  --runDir runs/saxophone_amt_paper --modelConf configs/amt.conf \
+  --trainingConf configs/amt_training.conf --device cuda
+```
+
+Cada línea de una partición contiene `wav/clip.wav<TAB>midi/clip.mid`, con
+rutas relativas al dataset. Para otro corpus se cambian datasetRoot,
+partitionDir y runDir. El ejemplo entrena desde cero; `--initAMT` es opcional
+para fine-tuning y `--resume` recupera un run previo. Para un entrenamiento
+independiente elegir un runDir nuevo. A2S conserva su propio comando y targets
+de score.
+
+El preset AMT sigue la tabla del paper V2: batch 12, fragmentos de 16 s,
+AdaBelief, LR máximo 4e-4, weight decay 1e-2, OneCycleLR de 500.000 updates
+con warm-up del 5% y clipping en el percentil 80 de las últimas 10.000 normas.
+El entrenamiento termina por updates, no por 50 épocas. Los argumentos CLI
+explícitos prevalecen sobre el preset.
+
 ## Adaptación experimental Audio-to-Score
 
 Este repositorio también permite entrenar y ejecutar **Transkun A2S**: mantiene

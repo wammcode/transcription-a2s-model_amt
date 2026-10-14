@@ -9,11 +9,11 @@ from .Util import computeParamSize
 
 def readAudio(path,  normalize= True):
     import pydub
-    audio = pydub.AudioSegment.from_mp3(path)
+    audio = pydub.AudioSegment.from_file(path)
     y = np.array(audio.get_array_of_samples())
     y = y.reshape(-1, audio.channels)
     if normalize:
-        y =  np.float32(y)/2**15
+        y = np.float32(y) / 2**(8 * audio.sample_width - 1)
     return audio.frame_rate, y
 
 

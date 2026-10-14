@@ -75,10 +75,19 @@ y progreso de training.
 
 ## 3. Conservación del core
 
-`LayersTransformer.py`, `Util.py`, `CRF`, `Data.py`, `train.py`, `TrainUtil.py`,
-`transcribe.py`, `Evaluation.py` y los pesos/configuración AMT originales no se
+`LayersTransformer.py`, `Util.py`, `CRF`, `Data.py`, `TrainUtil.py`,
+`Evaluation.py` y los pesos/configuración AMT originales no se
 modifican. Se conservan operaciones, bloques, parámetros, buffers, queries
 y dimensiones del frontend/backbone.
+
+Posteriormente se añadió una ruta AMT para datasets de `data/` con particiones
+TXT: `trainAMT.py` y `DataAMT.py`. `train.py` delega en ella cuando recibe
+`--datasetRoot`, conservando su ruta MAESTRO anterior. No cambia el modelo
+A2S ni el core. Los comandos están en
+[Transkun_AMT_TRAINING.md](Transkun_AMT_TRAINING.md).
+El lector de `transcribe.py` se ajustó para autodetectar formatos de audio y
+normalizar la anchura PCM, permitiendo WAV de los nuevos datasets. El forward,
+heads y decoding AMT permanecen iguales.
 
 El cambio al modelo AMT en `ModelTransformer.py` extrae su bloque existente de
 frontend/backbone a `encodeFramesBatch`; `processFramesBatch` lo llama y

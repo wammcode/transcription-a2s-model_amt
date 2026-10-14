@@ -1,0 +1,4 @@
+-r requirements.txt
+music21>=9,<11
+soundfile>=0.12
+pytest>=7

@@ -148,7 +148,8 @@ class TransKun(torch.nn.Module):
 
                 
 
-    def processFramesBatch(self, framesBatch):
+    def encodeFramesBatch(self, framesBatch):
+        """Original audio frontend and backbone, without AMT interval scoring."""
         
         nBatch = framesBatch.shape[0]
         # nChannel = framesBatch.shape[1]
@@ -174,6 +175,11 @@ class TransKun(torch.nn.Module):
 
 
         ctx = self.backbone(featuresBatch, outputIndices = torch.tensor(self.targetMIDIPitch, device = featuresBatch.device))
+
+        return ctx
+
+    def processFramesBatch(self, framesBatch):
+        ctx = self.encodeFramesBatch(framesBatch)
 
         # construct pairwise score matrix
 

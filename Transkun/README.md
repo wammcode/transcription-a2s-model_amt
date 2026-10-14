@@ -1,5 +1,41 @@
 # Piano Transcription with Neural Semi-CRF
 
+## Adaptación experimental Audio-to-Score
+
+Este repositorio también permite entrenar y ejecutar **Transkun A2S**: mantiene
+el frontend y backbone V2, añade una cabeza CTC de símbolos de partitura y
+produce Humdrum `**kern` directamente (`.krn` o `.kern`). Admite datasets
+monofónicos, polifónicos y de polifonía abierta, también mezclados en un batch.
+Los comandos AMT originales siguen disponibles.
+
+Consulta [la documentación técnica](Transkun_A2S_TECHNICAL.md) para dataset,
+configuración, entrenamiento, validación e inferencia, y
+[el resumen del experimento](Transkun_A2S_OVERVIEW.md) para su objetivo y alcance.
+
+Desde este directorio, con PyTorch/torchaudio compatibles instalados:
+
+```bash
+python -m pip install -e '.[a2s,test]'
+python -m transkun.trainA2S checkpoint/a2s.pt \
+  --modelConf configs/a2s.conf \
+  --datasetMetaFile_train /ruta/dataset/train.jsonl \
+  --datasetMetaFile_val /ruta/dataset/val.jsonl \
+  --initAMT transkun/pretrained/2.0.pt --device cuda
+python -m transkun.transcribeA2S /ruta/audio.wav /ruta/score.krn \
+  --weight checkpoint/a2s.best.pt --device cuda
+python -m pytest -q
+```
+
+Cada línea del manifest contiene `{"audio":"audio/clip.wav","score":"scores/clip.krn"}`;
+las rutas son relativas al manifest. Se requieren fragmentos emparejados y
+targets de partitura; el checkpoint AMT por sí solo todavía no predice A2S.
+También se aceptan partituras MusicXML como entrada e inline Kern en el campo
+`transcript`. El entrenamiento ajusta automáticamente los pasos CTC según las
+longitudes de los targets; `--noAutoFrameMultiplier` exige el valor configurado.
+El codec v2 compone números de posición, duración, parte y voz por dígitos.
+Los checkpoints A2S v1 existentes pueden seguir exportando Kern; el codec v2
+requiere entrenar un nuevo head y no se mezcla silenciosamente con pesos v1.
+
 
 This repo contains code for following papers for transcribing expressive piano performance into MIDI.
 

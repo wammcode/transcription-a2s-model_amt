@@ -1,0 +1,71 @@
+{
+  "source_file": "paper_audio_to_midi_base/2404.09466v6.pdf",
+  "source_sha256": "fde97485540b069c2ff0737cc8985aa3e9da237c491130a6b753679f883a1e70",
+  "source_pages": 8,
+  "original_copy_byte_identical": true,
+  "numbered_sections_and_subsections_including_appendix": 22,
+  "numbered_equations": 8,
+  "unnumbered_display_formulas": 2,
+  "figures": 2,
+  "tables": [
+    {
+      "table": 1,
+      "rows": 12,
+      "numeric_tokens_exact": true
+    },
+    {
+      "table": 2,
+      "rows": 14,
+      "parameter_counts": 14,
+      "metric_values": 147,
+      "dash_cells": 21,
+      "all_cells_exact": true
+    },
+    {
+      "table": 3,
+      "rows": 16,
+      "metric_values": 96,
+      "all_cells_exact": true
+    }
+  ],
+  "standalone_tables_match_embedded_tables": true,
+  "references_source_text_normalized_exact": 33,
+  "bibtex_entries_parsed": 33,
+  "bibtex_titles_authors_venues_and_years_checked": true,
+  "footnotes": 9,
+  "figure_files_present": true,
+  "unresolved_conversion_todos": 0,
+  "visual_review": "All 8 source pages and both exported figures inspected; equations, captions, emphasis and paragraph continuity manually checked.",
+  "limitation": "Normalized reference comparison ignores whitespace and punctuation; mathematical fidelity and prose order require the documented visual/manual review.",
+  "math_syntax_validation": {
+    "renderer": "KaTeX",
+    "display_formulas_valid": 10,
+    "inline_formula_occurrences_valid": 195
+  },
+  "prose_fragment_audit": {
+    "checked_fragments": 273,
+    "unmatched": []
+  },
+  "markdown_tables_parsed_in_main_file": 6,
+  "figure_pixel_dimensions": {
+    "figure_01_system_overview.png": [
+      876,
+      1188
+    ],
+    "figure_02_transformer_encoder.png": [
+      988,
+      501
+    ]
+  },
+  "artifact_sha256": {
+    "figures/figure_01_system_overview.png": "c33a0b829751581e3f441237810abd4de8519f6457c2cb0b951432197dfa6079",
+    "figures/figure_02_transformer_encoder.png": "55b20c1bee229d309a80e38bd414866df99f82d646be1db0555c492d03aa4828",
+    "notes/conversion_notes.md": "bc43a33d4c59d6507d3f326bdb294d5b2c9836db794fa385122a1545ebef9f09",
+    "original/paper.pdf": "fde97485540b069c2ff0737cc8985aa3e9da237c491130a6b753679f883a1e70",
+    "paper.md": "272d363b1001995ab51d702b3922849ae46bdecf2a5c91703ea5a8ec5db6e7fb",
+    "references.bib": "071899cb178c2d7a8e071aa9f9e01e8855f4b1c652f3e3bfc850ac2ebdedf0de",
+    "tables/table_01.md": "932c47b51927092b6f17841a0907b7b5fe3a15b27c1e6bb75457f10dc1662c2c",
+    "tables/table_02.md": "53779237e96be05b66d158bd66359598e4a56cb776f6ccb078e5047c05ee9311",
+    "tables/table_03.md": "407c17cc3d6543061f12862645e3db49fdbf6d033e4dce56a49ba25d318d13ef"
+  }
+}
